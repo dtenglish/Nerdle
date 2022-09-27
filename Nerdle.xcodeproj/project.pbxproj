@@ -20,6 +20,9 @@
 		BD65008628E3704400408A4B /* BoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD65008528E3704400408A4B /* BoardViewModel.swift */; };
 		BD65008828E37A8F00408A4B /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD65008728E37A8F00408A4B /* HelpView.swift */; };
 		BD65008A28E37AAB00408A4B /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD65008928E37AAB00408A4B /* StatsView.swift */; };
+		BD65008E28E384E000408A4B /* KeyboardKeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD65008D28E384E000408A4B /* KeyboardKeyView.swift */; };
+		BD65009028E38B6B00408A4B /* KeyboardKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD65008F28E38B6B00408A4B /* KeyboardKey.swift */; };
+		BD65009428E39AE000408A4B /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD65009328E39AE000408A4B /* KeyboardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +41,9 @@
 		BD65008528E3704400408A4B /* BoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewModel.swift; sourceTree = "<group>"; };
 		BD65008728E37A8F00408A4B /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
 		BD65008928E37AAB00408A4B /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
+		BD65008D28E384E000408A4B /* KeyboardKeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardKeyView.swift; sourceTree = "<group>"; };
+		BD65008F28E38B6B00408A4B /* KeyboardKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardKey.swift; sourceTree = "<group>"; };
+		BD65009328E39AE000408A4B /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,11 +76,11 @@
 		BD64944728E21BBF00828AC7 /* Nerdle */ = {
 			isa = PBXGroup;
 			children = (
+				BD64944828E21BBF00828AC7 /* NerdleApp.swift */,
 				BD65007628E22A9B00408A4B /* Models */,
 				BD65007728E22AA200408A4B /* Views */,
 				BD65007C28E22CD500408A4B /* View Models */,
 				BD65007328E229BA00408A4B /* Extensions */,
-				BD64944828E21BBF00828AC7 /* NerdleApp.swift */,
 				BD64945D28E2238200828AC7 /* Info.plist */,
 				BD64944C28E21BC400828AC7 /* Assets.xcassets */,
 				BD64944E28E21BC400828AC7 /* Preview Content */,
@@ -102,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				BD65007828E22ABC00408A4B /* Guess.swift */,
+				BD65008F28E38B6B00408A4B /* KeyboardKey.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -115,6 +122,8 @@
 				BD65008128E2361D00408A4B /* SettingsView.swift */,
 				BD65008728E37A8F00408A4B /* HelpView.swift */,
 				BD65008928E37AAB00408A4B /* StatsView.swift */,
+				BD65008D28E384E000408A4B /* KeyboardKeyView.swift */,
+				BD65009328E39AE000408A4B /* KeyboardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -201,6 +210,8 @@
 				BD65008A28E37AAB00408A4B /* StatsView.swift in Sources */,
 				BD64944B28E21BBF00828AC7 /* GameView.swift in Sources */,
 				BD65008228E2361D00408A4B /* SettingsView.swift in Sources */,
+				BD65009428E39AE000408A4B /* KeyboardView.swift in Sources */,
+				BD65009028E38B6B00408A4B /* KeyboardKey.swift in Sources */,
 				BD65008028E2323F00408A4B /* MainView.swift in Sources */,
 				BD65008828E37A8F00408A4B /* HelpView.swift in Sources */,
 				BD65007B28E22BA600408A4B /* GuessView.swift in Sources */,
@@ -209,6 +220,7 @@
 				BD65007E28E22D0100408A4B /* NerdleDataModel.swift in Sources */,
 				BD65007528E229DA00408A4B /* Color+Extension.swift in Sources */,
 				BD64944928E21BBF00828AC7 /* NerdleApp.swift in Sources */,
+				BD65008E28E384E000408A4B /* KeyboardKeyView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
