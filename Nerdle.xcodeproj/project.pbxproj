@@ -8,18 +8,36 @@
 
 /* Begin PBXBuildFile section */
 		BD64944928E21BBF00828AC7 /* NerdleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD64944828E21BBF00828AC7 /* NerdleApp.swift */; };
-		BD64944B28E21BBF00828AC7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD64944A28E21BBF00828AC7 /* ContentView.swift */; };
+		BD64944B28E21BBF00828AC7 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD64944A28E21BBF00828AC7 /* GameView.swift */; };
 		BD64944D28E21BC400828AC7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD64944C28E21BC400828AC7 /* Assets.xcassets */; };
 		BD64945028E21BC400828AC7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD64944F28E21BC400828AC7 /* Preview Assets.xcassets */; };
+		BD65007528E229DA00408A4B /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD65007428E229DA00408A4B /* Color+Extension.swift */; };
+		BD65007928E22ABC00408A4B /* Guess.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD65007828E22ABC00408A4B /* Guess.swift */; };
+		BD65007B28E22BA600408A4B /* GuessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD65007A28E22BA600408A4B /* GuessView.swift */; };
+		BD65007E28E22D0100408A4B /* NerdleDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD65007D28E22D0100408A4B /* NerdleDataModel.swift */; };
+		BD65008028E2323F00408A4B /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD65007F28E2323F00408A4B /* MainView.swift */; };
+		BD65008228E2361D00408A4B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD65008128E2361D00408A4B /* SettingsView.swift */; };
+		BD65008628E3704400408A4B /* BoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD65008528E3704400408A4B /* BoardViewModel.swift */; };
+		BD65008828E37A8F00408A4B /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD65008728E37A8F00408A4B /* HelpView.swift */; };
+		BD65008A28E37AAB00408A4B /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD65008928E37AAB00408A4B /* StatsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		BD64944528E21BBF00828AC7 /* Nerdle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nerdle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD64944828E21BBF00828AC7 /* NerdleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NerdleApp.swift; sourceTree = "<group>"; };
-		BD64944A28E21BBF00828AC7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		BD64944A28E21BBF00828AC7 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		BD64944C28E21BC400828AC7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BD64944F28E21BC400828AC7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BD64945D28E2238200828AC7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BD65007428E229DA00408A4B /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
+		BD65007828E22ABC00408A4B /* Guess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Guess.swift; sourceTree = "<group>"; };
+		BD65007A28E22BA600408A4B /* GuessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuessView.swift; sourceTree = "<group>"; };
+		BD65007D28E22D0100408A4B /* NerdleDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NerdleDataModel.swift; sourceTree = "<group>"; };
+		BD65007F28E2323F00408A4B /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		BD65008128E2361D00408A4B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		BD65008528E3704400408A4B /* BoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewModel.swift; sourceTree = "<group>"; };
+		BD65008728E37A8F00408A4B /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
+		BD65008928E37AAB00408A4B /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,9 +70,12 @@
 		BD64944728E21BBF00828AC7 /* Nerdle */ = {
 			isa = PBXGroup;
 			children = (
-				BD64945D28E2238200828AC7 /* Info.plist */,
+				BD65007628E22A9B00408A4B /* Models */,
+				BD65007728E22AA200408A4B /* Views */,
+				BD65007C28E22CD500408A4B /* View Models */,
+				BD65007328E229BA00408A4B /* Extensions */,
 				BD64944828E21BBF00828AC7 /* NerdleApp.swift */,
-				BD64944A28E21BBF00828AC7 /* ContentView.swift */,
+				BD64945D28E2238200828AC7 /* Info.plist */,
 				BD64944C28E21BC400828AC7 /* Assets.xcassets */,
 				BD64944E28E21BC400828AC7 /* Preview Content */,
 			);
@@ -67,6 +88,44 @@
 				BD64944F28E21BC400828AC7 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		BD65007328E229BA00408A4B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				BD65007428E229DA00408A4B /* Color+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		BD65007628E22A9B00408A4B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BD65007828E22ABC00408A4B /* Guess.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		BD65007728E22AA200408A4B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BD65007F28E2323F00408A4B /* MainView.swift */,
+				BD64944A28E21BBF00828AC7 /* GameView.swift */,
+				BD65007A28E22BA600408A4B /* GuessView.swift */,
+				BD65008128E2361D00408A4B /* SettingsView.swift */,
+				BD65008728E37A8F00408A4B /* HelpView.swift */,
+				BD65008928E37AAB00408A4B /* StatsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		BD65007C28E22CD500408A4B /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				BD65007D28E22D0100408A4B /* NerdleDataModel.swift */,
+				BD65008528E3704400408A4B /* BoardViewModel.swift */,
+			);
+			path = "View Models";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,7 +198,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BD64944B28E21BBF00828AC7 /* ContentView.swift in Sources */,
+				BD65008A28E37AAB00408A4B /* StatsView.swift in Sources */,
+				BD64944B28E21BBF00828AC7 /* GameView.swift in Sources */,
+				BD65008228E2361D00408A4B /* SettingsView.swift in Sources */,
+				BD65008028E2323F00408A4B /* MainView.swift in Sources */,
+				BD65008828E37A8F00408A4B /* HelpView.swift in Sources */,
+				BD65007B28E22BA600408A4B /* GuessView.swift in Sources */,
+				BD65007928E22ABC00408A4B /* Guess.swift in Sources */,
+				BD65008628E3704400408A4B /* BoardViewModel.swift in Sources */,
+				BD65007E28E22D0100408A4B /* NerdleDataModel.swift in Sources */,
+				BD65007528E229DA00408A4B /* Color+Extension.swift in Sources */,
 				BD64944928E21BBF00828AC7 /* NerdleApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -278,7 +346,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -310,7 +378,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
