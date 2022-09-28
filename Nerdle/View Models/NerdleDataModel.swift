@@ -8,6 +8,7 @@
 import SwiftUI
 
 class NerdleDataModel: ObservableObject {
+    @Published var screenWidth: CGFloat = 0
     @Published var guesses: [Guess] = []
     @Published var topRowKeys: [KeyboardKey] = []
     @Published var middleRowKeys: [KeyboardKey] = []
@@ -17,9 +18,16 @@ class NerdleDataModel: ObservableObject {
     let middleRowLetters = "ASDFGHJKL".map { String($0) }
     let bottomRowLetters = "ZXCVBNM".map { String($0) }
     
-//    @Published var keys: [KeyboardKey] = []
-//
-//    let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".map { String($0) }
+    var scaleFactor: CGFloat {
+        switch screenWidth {
+        case 0...743:
+            return screenWidth / 390
+        case 744...1023:
+            return 1.5
+        default:
+            return 1.8
+        }
+    }
     
     init() {
         newGame()
@@ -33,13 +41,21 @@ class NerdleDataModel: ObservableObject {
     func resetToDefaults() {
         guesses = []
         
-        for index in 0...5 {
-            guesses.append(Guess(index: index))
+        for i in 0...5 {
+            guesses.append(Guess(index: i))
         }
         
-//        for i in 0 ..< keys.count {
-//            keys[i].color = .unused
-//        }
+        for i in 0 ..< topRowKeys.count {
+            topRowKeys[i].color = .unused
+        }
+        
+        for i in 0 ..< middleRowKeys.count {
+            middleRowKeys[i].color = .unused
+        }
+        
+        for i in 0 ..< bottomRowKeys.count {
+            bottomRowKeys[i].color = .unused
+        }
     }
     
 }
@@ -50,20 +66,27 @@ extension NerdleDataModel {
 
     func populateKeys() {
         for letter in topRowLetters {
-            topRowKeys.append(KeyboardKey(key: letter, action: {self.addLetter(letter)}))
+            topRowKeys.append(KeyboardKey(key: letter) { self.addLetter(letter)
+            })
         }
         
         for letter in middleRowLetters {
-            middleRowKeys.append(KeyboardKey(key: letter, action: {self.addLetter(letter)}))
+            middleRowKeys.append(KeyboardKey(key: letter) { self.addLetter(letter)
+            })
         }
         
-        bottomRowKeys.append(KeyboardKey(key: "ENTER", action: {self.enterWord()}))
+        bottomRowKeys.append(KeyboardKey(key: "ENTER") {
+            self.enterWord()
+        })
         
         for letter in bottomRowLetters {
-            bottomRowKeys.append(KeyboardKey(key: letter, action: {self.addLetter(letter)}))
+            bottomRowKeys.append(KeyboardKey(key: letter) { self.addLetter(letter)
+            })
         }
         
-        bottomRowKeys.append(KeyboardKey(key: "BACKSPACE", action: {self.backspace()}))
+        bottomRowKeys.append(KeyboardKey(key: "BACKSPACE") {
+            self.backspace()
+        })
     }
 
     func addLetter(_ letter: String) {
@@ -71,11 +94,11 @@ extension NerdleDataModel {
     }
 
     func backspace() {
-        print("backspace")
+        print(scaleFactor)
     }
 
     func enterWord() {
-        print("enter word")
+        print(screenWidth)
     }
 
 }

@@ -12,25 +12,25 @@ struct KeyboardView: View {
     
     var body: some View {
         VStack {
-            HStack(spacing: 1) {
+            HStack(spacing: 2) {
                 ForEach(dataModel.topRowKeys, id: \.key) { key in
-                    KeyboardKeyView(key: key.key, color: key.color) {
+                    KeyboardKeyView(key: key.key, color: key.color, scaleFactor: dataModel.scaleFactor) {
                         key.action()
                     }
                 }
             }
             
-            HStack(spacing: 1) {
+            HStack(spacing: 2) {
                 ForEach(dataModel.middleRowKeys, id: \.key) { key in
-                    KeyboardKeyView(key: key.key, color: key.color) {
+                    KeyboardKeyView(key: key.key, color: key.color, scaleFactor: dataModel.scaleFactor) {
                         key.action()
                     }
                 }
             }
             
-            HStack(spacing: 1) {
+            HStack(spacing: 2) {
                 ForEach(dataModel.bottomRowKeys, id: \.key) { key in
-                    KeyboardKeyView(key: key.key, color: key.color) {
+                    KeyboardKeyView(key: key.key, color: key.color, scaleFactor: dataModel.scaleFactor) {
                         key.action()
                     }
                 }
@@ -42,5 +42,6 @@ struct KeyboardView: View {
 struct KeyboardView_Previews: PreviewProvider {
     static var previews: some View {
         KeyboardView()
+            .environmentObject(NerdleDataModel())
     }
 }

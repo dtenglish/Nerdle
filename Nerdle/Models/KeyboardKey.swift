@@ -9,6 +9,6 @@ import SwiftUI
 
 struct KeyboardKey {
     let key: String
-    let action: () -> Void
     var color: Color = .unused
+    let action: () -> Void
 }

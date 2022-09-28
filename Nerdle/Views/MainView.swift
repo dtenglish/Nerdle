@@ -12,6 +12,7 @@ struct MainView: View {
         NavigationStack {
             GameView()
                 .padding()
+                .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
                         NavigationLink(destination: HelpView()) {
@@ -42,14 +43,12 @@ struct MainView: View {
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         let dataModel = NerdleDataModel()
-        let boardViewModel = BoardViewModel()
         
         GeometryReader { geometry in
             MainView()
                 .environmentObject(dataModel)
-                .environmentObject(boardViewModel)
                 .onAppear {
-                    boardViewModel.screenWidth = geometry.size.width
+                    dataModel.screenWidth = geometry.size.width
                 }
         }
     }
