@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BD5A9BF728E623E6003ADBFC /* WordList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5A9BF628E623E6003ADBFC /* WordList.swift */; };
 		BD64944928E21BBF00828AC7 /* NerdleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD64944828E21BBF00828AC7 /* NerdleApp.swift */; };
 		BD64944B28E21BBF00828AC7 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD64944A28E21BBF00828AC7 /* GameView.swift */; };
 		BD64944D28E21BC400828AC7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD64944C28E21BC400828AC7 /* Assets.xcassets */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BD5A9BF628E623E6003ADBFC /* WordList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordList.swift; sourceTree = "<group>"; };
 		BD64944528E21BBF00828AC7 /* Nerdle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nerdle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD64944828E21BBF00828AC7 /* NerdleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NerdleApp.swift; sourceTree = "<group>"; };
 		BD64944A28E21BBF00828AC7 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
@@ -55,6 +57,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BD5A9BF528E623AC003ADBFC /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				BD5A9BF628E623E6003ADBFC /* WordList.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		BD64943C28E21BBE00828AC7 = {
 			isa = PBXGroup;
 			children = (
@@ -79,6 +89,7 @@
 				BD65007728E22AA200408A4B /* Views */,
 				BD65007C28E22CD500408A4B /* View Models */,
 				BD65007328E229BA00408A4B /* Extensions */,
+				BD5A9BF528E623AC003ADBFC /* Data */,
 				BD64945D28E2238200828AC7 /* Info.plist */,
 				BD64944C28E21BC400828AC7 /* Assets.xcassets */,
 				BD64944E28E21BC400828AC7 /* Preview Content */,
@@ -205,6 +216,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BD65008A28E37AAB00408A4B /* StatsView.swift in Sources */,
+				BD5A9BF728E623E6003ADBFC /* WordList.swift in Sources */,
 				BD64944B28E21BBF00828AC7 /* GameView.swift in Sources */,
 				BD65008228E2361D00408A4B /* SettingsView.swift in Sources */,
 				BD65009428E39AE000408A4B /* KeyboardView.swift in Sources */,

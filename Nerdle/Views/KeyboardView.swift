@@ -14,25 +14,19 @@ struct KeyboardView: View {
         VStack {
             HStack(spacing: 2) {
                 ForEach(dataModel.topRowKeys, id: \.key) { key in
-                    KeyboardKeyView(key: key.key, color: key.color, scaleFactor: dataModel.scaleFactor) {
-                        key.action()
-                    }
+                    KeyboardKeyView(key: key)
                 }
             }
             
             HStack(spacing: 2) {
                 ForEach(dataModel.middleRowKeys, id: \.key) { key in
-                    KeyboardKeyView(key: key.key, color: key.color, scaleFactor: dataModel.scaleFactor) {
-                        key.action()
-                    }
+                    KeyboardKeyView(key: key)
                 }
             }
             
             HStack(spacing: 2) {
                 ForEach(dataModel.bottomRowKeys, id: \.key) { key in
-                    KeyboardKeyView(key: key.key, color: key.color, scaleFactor: dataModel.scaleFactor) {
-                        key.action()
-                    }
+                    KeyboardKeyView(key: key)
                 }
             }
         }

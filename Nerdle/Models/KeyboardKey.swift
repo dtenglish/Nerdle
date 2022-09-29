@@ -10,5 +10,6 @@ import SwiftUI
 struct KeyboardKey {
     let key: String
     var color: Color = .unused
+    var isDisabled: Bool = false
     let action: () -> Void
 }

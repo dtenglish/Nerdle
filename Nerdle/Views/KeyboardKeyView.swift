@@ -8,52 +8,47 @@
 import SwiftUI
 
 struct KeyboardKeyView: View {
-    let key: String
-    var color: Color
-    var scaleFactor: CGFloat
-    let action: () -> Void
+    @EnvironmentObject var dataModel: NerdleDataModel
+    
+    var key: KeyboardKey
     
     var keyHeight: CGFloat {
-        return scaleFactor * 50
+        return dataModel.scaleFactor * 50
     }
     
     var smallKeyWidth: CGFloat {
-        return scaleFactor * 35
+        return dataModel.scaleFactor * 35
     }
     
     var largeKeyWidth: CGFloat {
-        return scaleFactor * 60
+        return dataModel.scaleFactor * 60
     }
     
     var fontSize: CGFloat {
-        return scaleFactor * 16
+        return dataModel.scaleFactor * 16
     }
     
     var body: some View {
         Button {
-            action()
+            key.action()
         } label: {
-            if key != "BACKSPACE" {
-                Text(key)
+            if key.key != "BACKSPACE" {
+                Text(key.key)
                     .font(.system(size: fontSize))
-                    .frame(width: key.count == 1 ? smallKeyWidth : largeKeyWidth, height: keyHeight)
-                    .background(color)
+                    .frame(width: key.key.count == 1 ? smallKeyWidth : largeKeyWidth, height: keyHeight)
+                    .background(key.color)
                     .foregroundColor(.primary)
             } else {
                 Image(systemName: "delete.backward.fill")
                     .font(.system(size: fontSize + 3, weight: .heavy))
                     .frame(width: largeKeyWidth, height: keyHeight)
-                    .background(color)
+                    .background(key.color)
                     .foregroundColor(.primary)
             }
         }
         .buttonStyle(.plain)
         .cornerRadius(5)
-    }
-}
-
-struct KeyboardButtonView_Previews: PreviewProvider {
-    static var previews: some View {
-        KeyboardKeyView(key: "L", color: .unused, scaleFactor: 1, action: { return })
+        .disabled(key.isDisabled)
+        .opacity(key.isDisabled ? 0.6 : 1.0)
     }
 }
