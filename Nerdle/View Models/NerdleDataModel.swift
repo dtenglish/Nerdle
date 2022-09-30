@@ -8,6 +8,7 @@
 import SwiftUI
 
 class NerdleDataModel: ObservableObject {
+
     @Published var screenWidth: CGFloat = 0
     @Published var guesses: [Guess] = []
     
@@ -227,6 +228,10 @@ extension NerdleDataModel {
                     currentGuess = ""
                 }
             } else {
+                withAnimation {
+                    guesses[rowIndex].shake = 1
+                }
+                guesses[rowIndex].shake = 0
                 print("invalid word")
             }
         }
@@ -237,9 +242,8 @@ extension NerdleDataModel {
     }
     
     func checkLetters() {
-        let guessLetters = currentGuess.map { String($0) }
         let solutionLetters = currentSolution.map { String($0) }
-        let invalidLetters = guessLetters.filter{!solutionLetters.contains($0)}
+        let invalidLetters = guesses[rowIndex].guessLetters.filter{!solutionLetters.contains($0)}
         disabledLetters += invalidLetters
         print("solution: " + currentSolution)
         print("guess: " + currentGuess)

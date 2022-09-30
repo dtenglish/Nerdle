@@ -30,8 +30,9 @@ struct GameView: View {
             Spacer()
             
             VStack(spacing: 3) {
-                ForEach(0...5, id: \.self) { index in
-                    GuessView(guess: $dataModel.guesses[index])
+                ForEach(0...5, id: \.self) { i in
+                    GuessView(guess: $dataModel.guesses[i])
+                        .modifier(Shake(animatableData: dataModel.guesses[i].shake))
                 }
             }
             .frame(width: boardWidth, height: boardHeight)
