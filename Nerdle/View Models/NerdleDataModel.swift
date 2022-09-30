@@ -46,14 +46,23 @@ class NerdleDataModel: ObservableObject {
     
     func newGame() {
         resetToDefaults()
+        
         if currentSolution != "" {
             completedWords.append(currentSolution)
         }
+        
         currentSolution = getNextWord()
+        
+        while completedWords.contains(currentSolution) {
+            currentSolution = getNextWord()
+        }
     }
     
     func resetToDefaults() {
         guesses = []
+        disabledLetters = []
+        rowIndex = 0
+        currentGuess = ""
         
         for i in 0...5 {
             guesses.append(Guess(index: i))
@@ -61,14 +70,17 @@ class NerdleDataModel: ObservableObject {
         
         for i in 0 ..< topRowKeys.count {
             topRowKeys[i].color = .unused
+            topRowKeys[i].isDisabled = false
         }
         
         for i in 0 ..< middleRowKeys.count {
             middleRowKeys[i].color = .unused
+            middleRowKeys[i].isDisabled = false
         }
         
         for i in 0 ..< bottomRowKeys.count {
             bottomRowKeys[i].color = .unused
+            bottomRowKeys[i].isDisabled = false
         }
     }
     
@@ -117,7 +129,19 @@ extension NerdleDataModel {
     }
     
     func updateKeyboard() {
-        
+        if currentGuess.count > 0 {
+            bottomRowKeys[8].isDisabled = false
+        } else {
+            bottomRowKeys[8].isDisabled = true
+        }
+        if currentGuess.count == 5 {
+            bottomRowKeys[0].isDisabled = false
+        } else {
+            bottomRowKeys[0].isDisabled = true
+        }
+    }
+    
+    func disableLetters() {
         for i in 0 ..< topRowKeys.count {
             if disabledLetters.contains(topRowKeys[i].key) {
                 topRowKeys[i].isDisabled = true
@@ -134,17 +158,6 @@ extension NerdleDataModel {
             if disabledLetters.contains(bottomRowKeys[i].key) {
                 bottomRowKeys[i].isDisabled = true
             }
-        }
-        
-        if currentGuess.count > 0 {
-            bottomRowKeys[8].isDisabled = false
-        } else {
-            bottomRowKeys[8].isDisabled = true
-        }
-        if currentGuess.count == 5 {
-            bottomRowKeys[0].isDisabled = false
-        } else {
-            bottomRowKeys[0].isDisabled = true
         }
     }
 }
@@ -202,10 +215,13 @@ extension NerdleDataModel {
                 print("valid word")
                 if currentGuess == currentSolution {
                     print("correct guess")
+                    newGame()
+                    return
                 } else {
                     print("incorrect guess")
                 }
                 checkLetters()
+                disableLetters()
                 if rowIndex < 6 {
                     rowIndex += 1
                     currentGuess = ""
