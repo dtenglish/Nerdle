@@ -18,7 +18,7 @@ struct GuessView: View {
                     .border(Color(.secondaryLabel))
                     .font(.system(size: 35, weight: .heavy))
                     .foregroundColor(.primary)
-                    .background(Color.systemBackground)
+                    .background(guess.bgColors[index])
             }
         }
     }

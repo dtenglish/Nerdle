@@ -8,13 +8,15 @@
 import SwiftUI
 
 class NerdleDataModel: ObservableObject {
-
+    
+    enum GameStatus {
+        case inPlay, win, lose
+    }
+    
+    @Published var gameStatus: GameStatus = .inPlay
     @Published var screenWidth: CGFloat = 0
     @Published var guesses: [Guess] = []
-    
-    @Published var topRowKeys: [KeyboardKey] = []
-    @Published var middleRowKeys: [KeyboardKey] = []
-    @Published var bottomRowKeys: [KeyboardKey] = []
+    @Published var keys: [String: KeyboardKey] = [:]
     
     var wordQueue: [String] = []
     var completedWords: [String] = []
@@ -24,6 +26,7 @@ class NerdleDataModel: ObservableObject {
     var currentGuess = ""
     var rowIndex = 0
     
+    let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".map { String($0) }
     let topRowLetters = "QWERTYUIOP".map { String($0) }
     let middleRowLetters = "ASDFGHJKL".map { String($0) }
     let bottomRowLetters = "ZXCVBNM".map { String($0) }
@@ -69,19 +72,9 @@ class NerdleDataModel: ObservableObject {
             guesses.append(Guess(index: i))
         }
         
-        for i in 0 ..< topRowKeys.count {
-            topRowKeys[i].color = .unused
-            topRowKeys[i].isDisabled = false
-        }
-        
-        for i in 0 ..< middleRowKeys.count {
-            middleRowKeys[i].color = .unused
-            middleRowKeys[i].isDisabled = false
-        }
-        
-        for i in 0 ..< bottomRowKeys.count {
-            bottomRowKeys[i].color = .unused
-            bottomRowKeys[i].isDisabled = false
+        for (key, _) in keys {
+            keys[key]?.color = .unused
+            keys[key]?.isDisabled = false
         }
     }
     
@@ -92,31 +85,21 @@ class NerdleDataModel: ObservableObject {
 extension NerdleDataModel {
 
     func populateKeys() {
-        for letter in topRowLetters {
-            topRowKeys.append(KeyboardKey(key: letter) {
+        
+        for letter in letters {
+            keys[letter] = (KeyboardKey(key: letter) {
                 self.keyPressed(letter)
             })
         }
         
-        for letter in middleRowLetters {
-            middleRowKeys.append(KeyboardKey(key: letter) {
-                self.keyPressed(letter)
-            })
-        }
-        
-        bottomRowKeys.append(KeyboardKey(key: "ENTER", isDisabled: true) {
+        keys["ENTER"] = (KeyboardKey(key: "ENTER", isDisabled: true) {
             self.keyPressed("ENTER")
         })
         
-        for letter in bottomRowLetters {
-            bottomRowKeys.append(KeyboardKey(key: letter) {
-                self.keyPressed(letter)
-            })
-        }
-        
-        bottomRowKeys.append(KeyboardKey(key: "BACKSPACE", isDisabled: true) {
+        keys["BACKSPACE"] = (KeyboardKey(key: "BACKSPACE", isDisabled: true) {
             self.keyPressed("BACKSPACE")
         })
+        
     }
     
     func keyPressed(_ key: String) {
@@ -131,36 +114,23 @@ extension NerdleDataModel {
     
     func updateKeyboard() {
         if currentGuess.count > 0 {
-            bottomRowKeys[8].isDisabled = false
+            keys["BACKSPACE"]?.isDisabled = false
         } else {
-            bottomRowKeys[8].isDisabled = true
+            keys["BACKSPACE"]?.isDisabled = true
         }
         if currentGuess.count == 5 {
-            bottomRowKeys[0].isDisabled = false
+            keys["ENTER"]?.isDisabled = false
         } else {
-            bottomRowKeys[0].isDisabled = true
+            keys["ENTER"]?.isDisabled = true
         }
     }
     
     func disableLetters() {
-        for i in 0 ..< topRowKeys.count {
-            if disabledLetters.contains(topRowKeys[i].key) {
-                topRowKeys[i].isDisabled = true
-            }
-        }
-        
-        for i in 0 ..< middleRowKeys.count {
-            if disabledLetters.contains(middleRowKeys[i].key) {
-                middleRowKeys[i].isDisabled = true
-            }
-        }
-        
-        for i in 0 ..< bottomRowKeys.count {
-            if disabledLetters.contains(bottomRowKeys[i].key) {
-                bottomRowKeys[i].isDisabled = true
-            }
+        for letter in disabledLetters {
+            keys[letter]?.isDisabled = true
         }
     }
+    
 }
 
 //MARK: - WORD LIST
@@ -214,19 +184,27 @@ extension NerdleDataModel {
         if currentGuess.count == 5 {
             if verifyWord() {
                 print("valid word")
+                checkLetters()
+                
                 if currentGuess == currentSolution {
-                    print("correct guess")
+                    print("correct guess, you win")
+                    gameStatus = .win
                     newGame()
                     return
                 } else {
                     print("incorrect guess")
                 }
-                checkLetters()
+                
                 disableLetters()
+                
                 if rowIndex < 6 {
                     rowIndex += 1
                     currentGuess = ""
+                } else {
+                    print("you lose")
+                    gameStatus = .lose
                 }
+                
             } else {
                 withAnimation {
                     guesses[rowIndex].shake = 1
@@ -242,9 +220,23 @@ extension NerdleDataModel {
     }
     
     func checkLetters() {
-        let solutionLetters = currentSolution.map { String($0) }
-        let invalidLetters = guesses[rowIndex].guessLetters.filter{!solutionLetters.contains($0)}
+        var solutionLetters = currentSolution.map { String($0) }
+        let guessLetters = guesses[rowIndex].guessLetters
+        let invalidLetters = guessLetters.filter{ !solutionLetters.contains($0) }
+        
         disabledLetters += invalidLetters
+        
+        for i in 0...4 {
+            if guessLetters[i] == solutionLetters[i] {
+                guesses[rowIndex].bgColors[i] = .correct
+                solutionLetters[i] = ""
+            } else if solutionLetters.contains(guessLetters[i]) {
+                guesses[rowIndex].bgColors[i] = .misplaced
+            } else {
+                guesses[rowIndex].bgColors[i] = .wrong
+            }
+        }
+        
         print("solution: " + currentSolution)
         print("guess: " + currentGuess)
         print(disabledLetters)

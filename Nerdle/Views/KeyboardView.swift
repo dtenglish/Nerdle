@@ -13,20 +13,35 @@ struct KeyboardView: View {
     var body: some View {
         VStack {
             HStack(spacing: 2) {
-                ForEach(dataModel.topRowKeys, id: \.key) { key in
-                    KeyboardKeyView(key: key)
+                ForEach(dataModel.topRowLetters, id: \.self) { letter in
+                    if let key = dataModel.keys[letter] {
+                        KeyboardKeyView(key: key)
+                    }
                 }
             }
             
             HStack(spacing: 2) {
-                ForEach(dataModel.middleRowKeys, id: \.key) { key in
-                    KeyboardKeyView(key: key)
+                ForEach(dataModel.middleRowLetters, id: \.self) { letter in
+                    if let key = dataModel.keys[letter] {
+                        KeyboardKeyView(key: key)
+                    }
                 }
             }
             
             HStack(spacing: 2) {
-                ForEach(dataModel.bottomRowKeys, id: \.key) { key in
-                    KeyboardKeyView(key: key)
+                
+                if let enterKey = dataModel.keys["ENTER"] {
+                    KeyboardKeyView(key: enterKey)
+                }
+                
+                ForEach(dataModel.bottomRowLetters, id: \.self) { letter in
+                    if let key = dataModel.keys[letter] {
+                        KeyboardKeyView(key: key)
+                    }
+                }
+                
+                if let backspaceKey = dataModel.keys["BACKSPACE"] {
+                    KeyboardKeyView(key: backspaceKey)
                 }
             }
         }
