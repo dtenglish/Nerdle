@@ -23,6 +23,7 @@
 		BD65008E28E384E000408A4B /* KeyboardKeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD65008D28E384E000408A4B /* KeyboardKeyView.swift */; };
 		BD65009028E38B6B00408A4B /* KeyboardKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD65008F28E38B6B00408A4B /* KeyboardKey.swift */; };
 		BD65009428E39AE000408A4B /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD65009328E39AE000408A4B /* KeyboardView.swift */; };
+		BDA286AD28EB7AC30042C1D1 /* LetterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA286AC28EB7AC30042C1D1 /* LetterView.swift */; };
 		BDD1ADFC28E760BC0050BA9F /* Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD1ADFB28E760BC0050BA9F /* Shake.swift */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +46,7 @@
 		BD65008D28E384E000408A4B /* KeyboardKeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardKeyView.swift; sourceTree = "<group>"; };
 		BD65008F28E38B6B00408A4B /* KeyboardKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardKey.swift; sourceTree = "<group>"; };
 		BD65009328E39AE000408A4B /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
+		BDA286AC28EB7AC30042C1D1 /* LetterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterView.swift; sourceTree = "<group>"; };
 		BDD1ADFB28E760BC0050BA9F /* Shake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shake.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -131,6 +133,7 @@
 				BD65007F28E2323F00408A4B /* MainView.swift */,
 				BD64944A28E21BBF00828AC7 /* GameView.swift */,
 				BD65007A28E22BA600408A4B /* GuessView.swift */,
+				BDA286AC28EB7AC30042C1D1 /* LetterView.swift */,
 				BD65009328E39AE000408A4B /* KeyboardView.swift */,
 				BD65008D28E384E000408A4B /* KeyboardKeyView.swift */,
 				BD65008128E2361D00408A4B /* SettingsView.swift */,
@@ -232,6 +235,7 @@
 				BD65008228E2361D00408A4B /* SettingsView.swift in Sources */,
 				BD65009428E39AE000408A4B /* KeyboardView.swift in Sources */,
 				BD65009028E38B6B00408A4B /* KeyboardKey.swift in Sources */,
+				BDA286AD28EB7AC30042C1D1 /* LetterView.swift in Sources */,
 				BD65008028E2323F00408A4B /* MainView.swift in Sources */,
 				BD65008828E37A8F00408A4B /* HelpView.swift in Sources */,
 				BD65007B28E22BA600408A4B /* GuessView.swift in Sources */,

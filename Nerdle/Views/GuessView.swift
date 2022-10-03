@@ -12,13 +12,8 @@ struct GuessView: View {
     
     var body: some View {
         HStack(spacing: 3) {
-            ForEach(0...4, id: \.self) { index in
-                Text(guess.guessLetters[index])
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .border(Color(.secondaryLabel))
-                    .font(.system(size: 35, weight: .heavy))
-                    .foregroundColor(.primary)
-                    .background(guess.bgColors[index])
+            ForEach(0...4, id: \.self) { i in
+                LetterView(isFlipped: $guess.cardsFlipped[i], letter: guess.guessLetters[i], letterStatus: guess.letterStatus[i])
             }
         }
     }
