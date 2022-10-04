@@ -40,6 +40,7 @@ struct GameView: View {
             Spacer()
             
             KeyboardView()
+                .disabled(dataModel.gameStatus == .inPlay ? false : true)
             
             Spacer()
         }

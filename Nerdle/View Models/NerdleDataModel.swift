@@ -20,7 +20,9 @@ class NerdleDataModel: ObservableObject {
     
     var wordQueue: [String] = []
     var completedWords: [String] = []
-    var disabledLetters: [String] = []
+    var correctLetters: [String] = []
+    var misplacedLetters: [String] = []
+    var incorrectLetters: [String] = []
     
     var currentSolution = ""
     var currentGuess = ""
@@ -64,7 +66,9 @@ class NerdleDataModel: ObservableObject {
     
     func resetToDefaults() {
         guesses = []
-        disabledLetters = []
+        correctLetters = []
+        misplacedLetters = []
+        incorrectLetters = []
         rowIndex = 0
         currentGuess = ""
         
@@ -125,8 +129,22 @@ extension NerdleDataModel {
         }
     }
     
+    func updateKeyColors() {
+        for letter in correctLetters {
+            keys[letter]?.color = .correct
+        }
+        
+        for letter in misplacedLetters {
+            keys[letter]?.color = .misplaced
+        }
+        
+        for letter in incorrectLetters {
+            keys[letter]?.color = .incorrect
+        }
+    }
+    
     func disableLetters() {
-        for letter in disabledLetters {
+        for letter in incorrectLetters {
             keys[letter]?.isDisabled = true
         }
     }
@@ -182,16 +200,13 @@ extension NerdleDataModel {
         if currentGuess.count == 5 {
             if verifyWord() {
                 checkLetters()
-                flipCards(row: rowIndex)
+                updateGameUI()
                 
                 if currentGuess == currentSolution {
-                    print("correct guess, you win")
                     gameStatus = .win
 //                    newGame()
                     return
                 }
-                
-                disableLetters()
                 
                 if rowIndex < 6 {
                     rowIndex += 1
@@ -216,16 +231,23 @@ extension NerdleDataModel {
     func checkLetters() {
         var solutionLetters = currentSolution.map { String($0) }
         let guessLetters = guesses[rowIndex].guessLetters
-        let invalidLetters = guessLetters.filter{ !solutionLetters.contains($0) }
         
-        disabledLetters += invalidLetters
+        incorrectLetters += guessLetters.filter{ !solutionLetters.contains($0) }
         
         for i in 0...4 {
-            if guessLetters[i] == solutionLetters[i] {
+            let guessLetter = guessLetters[i]
+            
+            if guessLetter == solutionLetters[i] {
                 guesses[rowIndex].letterStatus[i] = .correct
                 solutionLetters[i] = ""
-            } else if solutionLetters.contains(guessLetters[i]) {
+                if !correctLetters.contains(guessLetter) {
+                    correctLetters.append(guessLetter)
+                }
+            } else if solutionLetters.contains(guessLetter) {
                 guesses[rowIndex].letterStatus[i] = .misplaced
+                if !misplacedLetters.contains(guessLetter) {
+                    misplacedLetters.append(guessLetter)
+                }
             } else {
                 guesses[rowIndex].letterStatus[i] = .incorrect
             }
@@ -246,9 +268,24 @@ extension NerdleDataModel {
 
 extension NerdleDataModel {
     
+    func updateGameUI() {
+        flipCards(row: rowIndex)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            self.updateKeyColors()
+            if self.gameStatus == .win {
+                print("correct guess, you win!")
+            } else if self.gameStatus == .lose {
+                print("out of guesses, you lose!")
+            }
+        }
+        
+    }
+    
     func flipCards(row: Int) {
+        
         for i in 0...4 {
-            DispatchQueue.main.asyncAfter(deadline: .now() + Double(i) * 0.2) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + Double(i) * 0.25) {
                 self.guesses[row].cardsFlipped[i] = true
             }
         }
