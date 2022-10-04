@@ -24,6 +24,8 @@
 		BD65009028E38B6B00408A4B /* KeyboardKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD65008F28E38B6B00408A4B /* KeyboardKey.swift */; };
 		BD65009428E39AE000408A4B /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD65009328E39AE000408A4B /* KeyboardView.swift */; };
 		BDA286AD28EB7AC30042C1D1 /* LetterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA286AC28EB7AC30042C1D1 /* LetterView.swift */; };
+		BDA286AF28ECC3120042C1D1 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA286AE28ECC3120042C1D1 /* AlertView.swift */; };
+		BDA286B128ECC9B50042C1D1 /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA286B028ECC9B50042C1D1 /* Stats.swift */; };
 		BDD1ADFC28E760BC0050BA9F /* Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD1ADFB28E760BC0050BA9F /* Shake.swift */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +49,8 @@
 		BD65008F28E38B6B00408A4B /* KeyboardKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardKey.swift; sourceTree = "<group>"; };
 		BD65009328E39AE000408A4B /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
 		BDA286AC28EB7AC30042C1D1 /* LetterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterView.swift; sourceTree = "<group>"; };
+		BDA286AE28ECC3120042C1D1 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
+		BDA286B028ECC9B50042C1D1 /* Stats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stats.swift; sourceTree = "<group>"; };
 		BDD1ADFB28E760BC0050BA9F /* Shake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shake.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -123,6 +127,7 @@
 			children = (
 				BD65007828E22ABC00408A4B /* Guess.swift */,
 				BD65008F28E38B6B00408A4B /* KeyboardKey.swift */,
+				BDA286B028ECC9B50042C1D1 /* Stats.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -139,6 +144,7 @@
 				BD65008128E2361D00408A4B /* SettingsView.swift */,
 				BD65008728E37A8F00408A4B /* HelpView.swift */,
 				BD65008928E37AAB00408A4B /* StatsView.swift */,
+				BDA286AE28ECC3120042C1D1 /* AlertView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -230,6 +236,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BD65008A28E37AAB00408A4B /* StatsView.swift in Sources */,
+				BDA286B128ECC9B50042C1D1 /* Stats.swift in Sources */,
 				BD5A9BF728E623E6003ADBFC /* WordList.swift in Sources */,
 				BD64944B28E21BBF00828AC7 /* GameView.swift in Sources */,
 				BD65008228E2361D00408A4B /* SettingsView.swift in Sources */,
@@ -245,6 +252,7 @@
 				BD65007528E229DA00408A4B /* Color+Extension.swift in Sources */,
 				BD64944928E21BBF00828AC7 /* NerdleApp.swift in Sources */,
 				BD65008E28E384E000408A4B /* KeyboardKeyView.swift in Sources */,
+				BDA286AF28ECC3120042C1D1 /* AlertView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

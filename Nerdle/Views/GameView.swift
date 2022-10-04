@@ -36,6 +36,11 @@ struct GameView: View {
                 }
             }
             .frame(width: boardWidth, height: boardHeight)
+            .overlay(alignment: .center) {
+                if let alertMessage = dataModel.alertMessage {
+                    AlertView(message: alertMessage)
+                }
+            }
             
             Spacer()
             

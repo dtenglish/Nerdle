@@ -17,6 +17,7 @@ class NerdleDataModel: ObservableObject {
     @Published var screenWidth: CGFloat = 0
     @Published var guesses: [Guess] = []
     @Published var keys: [String: KeyboardKey] = [:]
+    @Published var alertMessage: String?
     
     var wordQueue: [String] = []
     var completedWords: [String] = []
@@ -27,6 +28,7 @@ class NerdleDataModel: ObservableObject {
     var currentSolution = ""
     var currentGuess = ""
     var rowIndex = 0
+    var isFlipping = false
     
     let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".map { String($0) }
     let topRowLetters = "QWERTYUIOP".map { String($0) }
@@ -107,13 +109,15 @@ extension NerdleDataModel {
     }
     
     func keyPressed(_ key: String) {
-        switch key {
-        case "ENTER": enterWord()
-        case "BACKSPACE": backspace()
-        default: addLetter(key)
+        if !isFlipping {
+            switch key {
+            case "ENTER": enterWord()
+            case "BACKSPACE": backspace()
+            default: addLetter(key)
+            }
+            
+            updateKeyboard()
         }
-        
-        updateKeyboard()
     }
     
     func updateKeyboard() {
@@ -220,6 +224,7 @@ extension NerdleDataModel {
                     guesses[rowIndex].shake = 1
                 }
                 guesses[rowIndex].shake = 0
+                showAlert(message: "Not in word list")
             }
         }
     }
@@ -269,25 +274,35 @@ extension NerdleDataModel {
 extension NerdleDataModel {
     
     func updateGameUI() {
+        isFlipping = true
         flipCards(row: rowIndex)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            self.isFlipping = false
             self.updateKeyColors()
             if self.gameStatus == .win {
-                print("correct guess, you win!")
+                self.showAlert(message: "Correct guess, you win!")
             } else if self.gameStatus == .lose {
-                print("out of guesses, you lose!")
+                self.showAlert(message: "Out of guesses, you lose!")
             }
         }
         
     }
     
     func flipCards(row: Int) {
-        
         for i in 0...4 {
             DispatchQueue.main.asyncAfter(deadline: .now() + Double(i) * 0.25) {
                 self.guesses[row].cardsFlipped[i] = true
             }
+        }
+    }
+    
+    func showAlert(message: String) {
+        withAnimation {
+            alertMessage = message
+        }
+        withAnimation(Animation.linear(duration: 0.2).delay(3)) {
+            alertMessage = nil
         }
     }
     
