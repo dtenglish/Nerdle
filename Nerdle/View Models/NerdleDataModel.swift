@@ -18,12 +18,14 @@ class NerdleDataModel: ObservableObject {
     @Published var guesses: [Guess] = []
     @Published var keys: [String: KeyboardKey] = [:]
     @Published var alertMessage: String?
+    @Published var showStats = false
     
     var wordQueue: [String] = []
     var completedWords: [String] = []
     var correctLetters: [String] = []
     var misplacedLetters: [String] = []
     var incorrectLetters: [String] = []
+    var stats: Stats = Stats()
     
     var currentSolution = ""
     var currentGuess = ""
@@ -64,6 +66,8 @@ class NerdleDataModel: ObservableObject {
         while completedWords.contains(currentSolution) {
             currentSolution = getNextWord()
         }
+        
+        gameStatus = .inPlay
     }
     
     func resetToDefaults() {
@@ -91,7 +95,6 @@ class NerdleDataModel: ObservableObject {
 extension NerdleDataModel {
 
     func populateKeys() {
-        
         for letter in letters {
             keys[letter] = (KeyboardKey(key: letter) {
                 self.keyPressed(letter)
@@ -105,7 +108,6 @@ extension NerdleDataModel {
         keys["BACKSPACE"] = (KeyboardKey(key: "BACKSPACE", isDisabled: true) {
             self.keyPressed("BACKSPACE")
         })
-        
     }
     
     func keyPressed(_ key: String) {
@@ -205,19 +207,7 @@ extension NerdleDataModel {
             if verifyWord() {
                 checkLetters()
                 updateGameUI()
-                
-                if currentGuess == currentSolution {
-                    gameStatus = .win
-//                    newGame()
-                    return
-                }
-                
-                if rowIndex < 6 {
-                    rowIndex += 1
-                    currentGuess = ""
-                } else {
-                    gameStatus = .lose
-                }
+                checkGameStatus()
                 
             } else {
                 withAnimation {
@@ -226,6 +216,23 @@ extension NerdleDataModel {
                 guesses[rowIndex].shake = 0
                 showAlert(message: "Not in word list")
             }
+        }
+    }
+    
+    func checkGameStatus() {
+        if currentGuess == currentSolution {
+            stats.totalGames += 1
+            stats.wins[rowIndex] += 1
+            gameStatus = .win
+            return
+        }
+        
+        if rowIndex < 6 {
+            rowIndex += 1
+            currentGuess = ""
+        } else {
+            stats.totalGames += 1
+            gameStatus = .lose
         }
     }
     
@@ -280,10 +287,17 @@ extension NerdleDataModel {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             self.isFlipping = false
             self.updateKeyColors()
-            if self.gameStatus == .win {
-                self.showAlert(message: "Correct guess, you win!")
-            } else if self.gameStatus == .lose {
-                self.showAlert(message: "Out of guesses, you lose!")
+            if self.gameStatus != .inPlay
+            {
+                if self.gameStatus == .win {
+                    self.showAlert(message: "Correct guess, you win!")
+                } else if self.gameStatus == .lose {
+                    self.showAlert(message: "Out of guesses, you lose!")
+                }
+                
+                withAnimation(Animation.linear(duration: 0.2).delay(1.5)) {
+                    self.showStats = true
+                }
             }
         }
         

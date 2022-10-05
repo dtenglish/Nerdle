@@ -26,6 +26,7 @@
 		BDA286AD28EB7AC30042C1D1 /* LetterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA286AC28EB7AC30042C1D1 /* LetterView.swift */; };
 		BDA286AF28ECC3120042C1D1 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA286AE28ECC3120042C1D1 /* AlertView.swift */; };
 		BDA286B128ECC9B50042C1D1 /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA286B028ECC9B50042C1D1 /* Stats.swift */; };
+		BDA286B528EE0EDA0042C1D1 /* StatsGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA286B428EE0EDA0042C1D1 /* StatsGraphView.swift */; };
 		BDD1ADFC28E760BC0050BA9F /* Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD1ADFB28E760BC0050BA9F /* Shake.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +52,7 @@
 		BDA286AC28EB7AC30042C1D1 /* LetterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterView.swift; sourceTree = "<group>"; };
 		BDA286AE28ECC3120042C1D1 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		BDA286B028ECC9B50042C1D1 /* Stats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stats.swift; sourceTree = "<group>"; };
+		BDA286B428EE0EDA0042C1D1 /* StatsGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsGraphView.swift; sourceTree = "<group>"; };
 		BDD1ADFB28E760BC0050BA9F /* Shake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shake.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -145,6 +147,7 @@
 				BD65008728E37A8F00408A4B /* HelpView.swift */,
 				BD65008928E37AAB00408A4B /* StatsView.swift */,
 				BDA286AE28ECC3120042C1D1 /* AlertView.swift */,
+				BDA286B428EE0EDA0042C1D1 /* StatsGraphView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -243,6 +246,7 @@
 				BD65009428E39AE000408A4B /* KeyboardView.swift in Sources */,
 				BD65009028E38B6B00408A4B /* KeyboardKey.swift in Sources */,
 				BDA286AD28EB7AC30042C1D1 /* LetterView.swift in Sources */,
+				BDA286B528EE0EDA0042C1D1 /* StatsGraphView.swift in Sources */,
 				BD65008028E2323F00408A4B /* MainView.swift in Sources */,
 				BD65008828E37A8F00408A4B /* HelpView.swift in Sources */,
 				BD65007B28E22BA600408A4B /* GuessView.swift in Sources */,

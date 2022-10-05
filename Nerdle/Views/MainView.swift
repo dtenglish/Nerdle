@@ -8,34 +8,45 @@
 import SwiftUI
 
 struct MainView: View {
+    @EnvironmentObject var dataModel: NerdleDataModel
+    
     var body: some View {
-        NavigationStack {
-            GameView()
-                .padding()
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        NavigationLink(destination: HelpView()) {
-                            Image(systemName: "questionmark.circle")
-                        }
-                    }
-                    ToolbarItem(placement: .principal) {
-                        Text("NERDLE")
-                            .font(.largeTitle)
-                            .fontWeight(.heavy)
-                            .foregroundColor(.primary)
-                    }
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        HStack {
-                            NavigationLink(destination: StatsView()) {
-                                Image(systemName: "chart.bar")
-                            }
-                            NavigationLink(destination: SettingsView()) {
-                                Image(systemName: "gearshape.fill")
+        ZStack {
+            NavigationStack {
+                GameView()
+                    .padding()
+                    .disabled(dataModel.showStats)
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarLeading) {
+                            NavigationLink(destination: HelpView()) {
+                                Image(systemName: "questionmark.circle")
                             }
                         }
+                        ToolbarItem(placement: .principal) {
+                            Text("NERDLE")
+                                .font(.largeTitle)
+                                .fontWeight(.heavy)
+                                .foregroundColor(.primary)
+                        }
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            HStack {
+                                Button {
+                                    dataModel.showStats.toggle()
+                                } label: {
+                                    Image(systemName: "chart.bar")
+                                }
+                                NavigationLink(destination: SettingsView()) {
+                                    Image(systemName: "gearshape.fill")
+                                }
+                            }
+                        }
                     }
-                }
+            }
+            if dataModel.showStats {
+                StatsView()
+                    .offset(y: dataModel.screenWidth * -0.15)
+            }
         }
     }
 }

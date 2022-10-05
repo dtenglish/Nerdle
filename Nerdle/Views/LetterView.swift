@@ -41,7 +41,12 @@ struct LetterView: View {
                 .rotation3DEffect(Angle(degrees: backRotation), axis: (x: 0, y: 1, z: 0.0001)) // z being 0 gives warning message?
         }
         .onChange(of: isFlipped) { _ in
-            flipCard()
+            if isFlipped {
+                flipCard()
+            } else {
+                frontRotation = 0
+                backRotation = 90
+            }
         }
     }
     
