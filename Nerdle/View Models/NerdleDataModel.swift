@@ -136,7 +136,6 @@ extension NerdleDataModel {
     }
     
     func updateKeyColors() {
-
         for letter in incorrectLetters {
             keys[letter]?.color = .incorrect
         }
@@ -148,7 +147,6 @@ extension NerdleDataModel {
         for letter in correctLetters {
             keys[letter]?.color = .correct
         }
-        
     }
     
     func disableLetters() {
@@ -225,15 +223,20 @@ extension NerdleDataModel {
         if currentGuess == currentSolution {
             stats.totalGames += 1
             stats.wins[rowIndex] += 1
+            stats.currentStreak += 1
+            if stats.currentStreak > stats.highestStreak {
+                stats.highestStreak = stats.currentStreak
+            }
             gameStatus = .win
             return
         }
         
-        if rowIndex < 6 {
+        if rowIndex < 5 {
             rowIndex += 1
             currentGuess = ""
         } else {
             stats.totalGames += 1
+            stats.currentStreak = 0
             gameStatus = .lose
         }
     }
