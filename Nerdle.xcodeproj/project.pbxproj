@@ -145,8 +145,8 @@
 				BD65008D28E384E000408A4B /* KeyboardKeyView.swift */,
 				BD65008128E2361D00408A4B /* SettingsView.swift */,
 				BD65008728E37A8F00408A4B /* HelpView.swift */,
-				BD65008928E37AAB00408A4B /* StatsView.swift */,
 				BDA286AE28ECC3120042C1D1 /* AlertView.swift */,
+				BD65008928E37AAB00408A4B /* StatsView.swift */,
 				BDA286B428EE0EDA0042C1D1 /* StatsGraphView.swift */,
 			);
 			path = Views;

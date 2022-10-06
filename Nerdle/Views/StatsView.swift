@@ -10,8 +10,12 @@ import SwiftUI
 struct StatsView: View {
     @EnvironmentObject var dataModel: NerdleDataModel
     
-    var counterWidth: CGFloat {
-        return dataModel.screenWidth * 0.2
+//    var counterWidth: CGFloat {
+//        return dataModel.screenWidth * 0.2
+//    }
+    
+    var rem: CGFloat {
+        return dataModel.screenWidth * 0.1
     }
     
     var winPercentage: Int {
@@ -41,49 +45,52 @@ struct StatsView: View {
                 .padding(.bottom, 12)
             HStack(alignment: .top, spacing: 0) {
                 StatCounterView(label: "Played", value: dataModel.stats.totalGames)
-                    .frame(width: counterWidth)
+                    .frame(width: rem * 2)
                     .fixedSize()
                 StatCounterView(label: "Win %", value: winPercentage)
-                    .frame(width: counterWidth)
+                    .frame(width: rem * 2)
                     .fixedSize()
                 StatCounterView(label: "Current Streak", value: dataModel.stats.currentStreak)
-                    .frame(width: counterWidth)
+                    .frame(width: rem * 2)
                     .fixedSize()
                 StatCounterView(label: "Best Streak", value: dataModel.stats.highestStreak)
-                    .frame(width: counterWidth)
+                    .frame(width: rem * 2)
                     .fixedSize()
             }
             .padding(.bottom, 12)
             Text("GUESS DISTRIBUTION")
                 .font(.headline)
                 .fontWeight(.bold)
-                .padding(.bottom, 12)
+                .padding(.bottom, 16)
             StatsGraphView()
+                .frame(maxWidth: .infinity)
                 .padding(.bottom, 12)
-            HStack {
-                StatsButtonView(label: "New Game", width: dataModel.screenWidth * 0.35, bgColor: .correct) {
-                    dataModel.newGame()
-                    withAnimation {
-                        dataModel.showStats = false
+            if dataModel.gameStatus != .inPlay {
+                HStack {
+                    StatsButtonView(label: "New Game", width: rem * 3.5, bgColor: .correct) {
+                        dataModel.newGame()
+                        withAnimation {
+                            dataModel.showStats = false
+                        }
+                    }
+                    
+                    Divider()
+                        .background(Color.incorrect)
+                        .padding(.horizontal, 8)
+                        .frame(height: 45)
+                    
+                    StatsButtonView(label: "Share", icon: "square.and.arrow.up", width: rem * 3.5, bgColor: .blue) {
+                        // some action
                     }
                 }
-                .disabled(dataModel.gameStatus == .inPlay)
-                
-                Divider()
-                    .background(Color.incorrect)
-                    .padding(.horizontal, 8)
-                    .frame(height: 45)
-                
-                StatsButtonView(label: "Share", icon: "square.and.arrow.up", width: dataModel.screenWidth * 0.35, bgColor: .blue) {
-                    // some action
-                }
-                
+                .padding(.bottom, 12)
             }
-            Spacer()
         }
-//        .padding(.horizontal, dataModel.screenWidth * 0.1)
-        .padding()
-        .frame(width: dataModel.screenWidth * 0.9, height: dataModel.screenWidth * 1.3)
+        .padding(.vertical, rem * 0.25)
+        .padding(.horizontal, rem * 0.5)
+//        .padding(.bottom, dataModel.screenWidth * 0.1)
+        .frame(width: rem * 9)
+        .fixedSize()
         .background(RoundedRectangle(cornerRadius: 8)
             .fill(Color.systemBackground)
             .shadow(color: .black.opacity(0.3), radius: 6, x: 2, y: 2)
