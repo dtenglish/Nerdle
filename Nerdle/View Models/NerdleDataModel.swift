@@ -136,17 +136,19 @@ extension NerdleDataModel {
     }
     
     func updateKeyColors() {
-        for letter in correctLetters {
-            keys[letter]?.color = .correct
+
+        for letter in incorrectLetters {
+            keys[letter]?.color = .incorrect
         }
         
         for letter in misplacedLetters {
             keys[letter]?.color = .misplaced
         }
         
-        for letter in incorrectLetters {
-            keys[letter]?.color = .incorrect
+        for letter in correctLetters {
+            keys[letter]?.color = .correct
         }
+        
     }
     
     func disableLetters() {
