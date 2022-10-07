@@ -16,4 +16,9 @@ struct Stats: Codable {
     var totalWins: Int {
         wins.reduce(0, +)
     }
+    
+    var winPercentage: Int {
+        let percentage = Double(totalWins) / Double(totalGames)
+        return Int(percentage * 100)
+    }
 }

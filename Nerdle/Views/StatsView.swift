@@ -10,21 +10,8 @@ import SwiftUI
 struct StatsView: View {
     @EnvironmentObject var dataModel: NerdleDataModel
     
-//    var counterWidth: CGFloat {
-//        return dataModel.screenWidth * 0.2
-//    }
-    
     var rem: CGFloat {
         return dataModel.screenWidth * 0.1
-    }
-    
-    var winPercentage: Int {
-        if dataModel.stats.totalGames != 0 {
-            let percentage = dataModel.stats.totalWins / dataModel.stats.totalGames
-            return percentage * 100
-        } else {
-            return 0
-        }
     }
     
     var body: some View {
@@ -47,7 +34,7 @@ struct StatsView: View {
                 StatCounterView(label: "Played", value: dataModel.stats.totalGames)
                     .frame(width: rem * 2)
                     .fixedSize()
-                StatCounterView(label: "Win %", value: winPercentage)
+                StatCounterView(label: "Win %", value: dataModel.stats.winPercentage)
                     .frame(width: rem * 2)
                     .fixedSize()
                 StatCounterView(label: "Current Streak", value: dataModel.stats.currentStreak)
@@ -64,31 +51,42 @@ struct StatsView: View {
                 .padding(.bottom, 16)
             StatsGraphView()
                 .frame(maxWidth: .infinity)
-                .padding(.bottom, 12)
+                .padding(.bottom, dataModel.gameStatus == .inPlay ? 24 : 12)
             if dataModel.gameStatus != .inPlay {
                 HStack {
-                    StatsButtonView(label: "New Game", width: rem * 3.5, bgColor: .correct) {
+                    Button {
                         dataModel.newGame()
                         withAnimation {
                             dataModel.showStats = false
                         }
+                    } label: {
+                        HStack {
+                            Text("New Game")
+                        }
                     }
+                    .fontWeight(.semibold)
+                    .frame(width: rem * 3.5 , height: 50)
+                    .background(Color.correct)
+                    .foregroundColor(.white)
+                    .cornerRadius(5)
                     
                     Divider()
                         .background(Color.incorrect)
                         .padding(.horizontal, 8)
                         .frame(height: 45)
                     
-                    StatsButtonView(label: "Share", icon: "square.and.arrow.up", width: rem * 3.5, bgColor: .blue) {
-                        // some action
-                    }
+                    ShareLink(item: dataModel.getResult())
+                        .fontWeight(.semibold)
+                        .frame(width: rem * 3.5 , height: 50)
+                        .background(.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(5)
                 }
                 .padding(.bottom, 12)
             }
         }
         .padding(.vertical, rem * 0.25)
         .padding(.horizontal, rem * 0.5)
-//        .padding(.bottom, dataModel.screenWidth * 0.1)
         .frame(width: rem * 9)
         .fixedSize()
         .background(RoundedRectangle(cornerRadius: 8)
@@ -110,32 +108,6 @@ struct StatCounterView: View {
                 .font(.subheadline)
                 .multilineTextAlignment(.center)
                 .lineLimit(2, reservesSpace: true)
-        }
-    }
-}
-
-struct StatsButtonView: View {
-    let label: String
-    var icon: String?
-    let width: CGFloat
-    let bgColor: Color
-    let action: () -> Void
-    
-    var body: some View {
-        Button {
-            action()
-        } label: {
-            HStack {
-                if let iconName = icon {
-                    Image(systemName: iconName)
-                }
-                Text(label)
-            }
-            .fontWeight(.semibold)
-            .frame(width: width , height: 50)
-            .background(bgColor)
-            .foregroundColor(.white)
-            .cornerRadius(5)
         }
     }
 }

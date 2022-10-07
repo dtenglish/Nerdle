@@ -86,6 +86,10 @@ class NerdleDataModel: ObservableObject {
             keys[key]?.color = .unused
             keys[key]?.isDisabled = false
         }
+        
+        keys["ENTER"]?.isDisabled = true
+        keys["BACKSPACE"]?.isDisabled = true
+        
     }
     
 }
@@ -228,16 +232,13 @@ extension NerdleDataModel {
                 stats.highestStreak = stats.currentStreak
             }
             gameStatus = .win
-            return
-        }
-        
-        if rowIndex < 5 {
-            rowIndex += 1
-            currentGuess = ""
-        } else {
+        } else if rowIndex == 5 {
             stats.totalGames += 1
             stats.currentStreak = 0
             gameStatus = .lose
+        } else {
+            rowIndex += 1
+            currentGuess = ""
         }
     }
     
@@ -323,6 +324,23 @@ extension NerdleDataModel {
         withAnimation(Animation.linear(duration: 0.2).delay(3)) {
             alertMessage = nil
         }
+    }
+    
+    func getResult() -> String {
+        var resultString = "Nerdle #\(stats.totalGames) - \(rowIndex + 1) / 6"
+        
+        for i in 0...rowIndex {
+            resultString += "\n"
+            for letter in guesses[i].letterStatus {
+                switch letter {
+                case .correct: resultString += "🟩"
+                case .incorrect: resultString += "⬛"
+                case .misplaced: resultString += "🟨"
+                }
+            }
+        }
+        
+        return resultString
     }
     
 }
