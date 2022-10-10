@@ -13,7 +13,7 @@ struct GuessView: View {
     var body: some View {
         HStack(spacing: 3) {
             ForEach(0...4, id: \.self) { i in
-                LetterView(isFlipped: $guess.cardsFlipped[i], letter: guess.guessLetters[i], letterStatus: guess.letterStatus[i])
+                LetterView(isFlipped: $guess.cardsFlipped[i], isBouncing: $guess.cardsBouncing[i], letter: guess.guessLetters[i], letterStatus: guess.letterStatus[i])
             }
         }
     }

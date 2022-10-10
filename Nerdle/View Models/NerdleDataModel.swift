@@ -77,6 +77,7 @@ class NerdleDataModel: ObservableObject {
         incorrectLetters = []
         rowIndex = 0
         currentGuess = ""
+        alertMessage = nil
         
         for i in 0...5 {
             guesses.append(Guess(index: i))
@@ -290,19 +291,23 @@ extension NerdleDataModel {
         isFlipping = true
         flipCards(row: rowIndex)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-            self.isFlipping = false
-            self.updateKeyColors()
-            if self.gameStatus != .inPlay
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [self] in
+            isFlipping = false
+            updateKeyColors()
+            if gameStatus != .inPlay
             {
-                if self.gameStatus == .win {
-                    self.showAlert(message: "Correct guess, you win!")
-                } else if self.gameStatus == .lose {
-                    self.showAlert(message: "Out of guesses, you lose!")
+                if gameStatus == .win {
+                    showAlert(message: "Correct guess, you win!")
+                    bounceCards(row: rowIndex)
+                } else if gameStatus == .lose {
+                    showAlert(message: "Out of guesses, you lose")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [self] in
+                        showAlert(message: "Solution: " + currentSolution)
+                    }
                 }
                 
-                withAnimation(Animation.linear(duration: 0.2).delay(1.5)) {
-                    self.showStats = true
+                withAnimation(Animation.linear(duration: 0.2).delay(gameStatus == .lose ? 4 : 2)) {
+                    showStats = true
                 }
             }
         }
@@ -317,12 +322,22 @@ extension NerdleDataModel {
         }
     }
     
+    func bounceCards(row: Int) {
+        for i in 0...4 {
+            DispatchQueue.main.asyncAfter(deadline: .now() + Double(i) * 0.3) {
+                self.guesses[row].cardsBouncing[i] = true
+            }
+        }
+    }
+    
     func showAlert(message: String) {
         withAnimation {
             alertMessage = message
         }
-        withAnimation(Animation.linear(duration: 0.2).delay(3)) {
-            alertMessage = nil
+        if gameStatus != .lose {
+            withAnimation(Animation.linear(duration: 0.2).delay(3)) {
+                alertMessage = nil
+            }
         }
     }
     
@@ -341,6 +356,18 @@ extension NerdleDataModel {
         }
         
         return resultString
+    }
+    
+    // TODO: add ability to share overall stats
+    
+    func getStatString() -> String {
+        var statString = "My Nerdle Stats\n"
+        statString += "Games Played: \(stats.totalGames)\n"
+        statString += "Win %: \(stats.winPercentage)\n"
+        statString += "Current Streak: \(stats.currentStreak)\n"
+        statString += "Best Streak: \(stats.highestStreak)\n"
+        
+        return statString
     }
     
 }

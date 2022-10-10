@@ -9,12 +9,15 @@ import SwiftUI
 
 struct LetterView: View {
     @Binding var isFlipped: Bool
+    @Binding var isBouncing: Bool
     @State var frontRotation: Double = 0.0
     @State var backRotation: Double = 90.0
+    @State var verticalOffset: CGFloat = 0
     
     var letter: String
     var letterStatus: Guess.LetterStatus
-    var bgColor: Color {
+    
+    private var bgColor: Color {
         switch letterStatus {
         case .correct: return .correct
         case .misplaced: return .misplaced
@@ -30,7 +33,9 @@ struct LetterView: View {
                 .font(.system(size: 35, weight: .heavy))
                 .foregroundColor(.primary)
                 .background(Color.systemBackground)
-                .rotation3DEffect(Angle(degrees: frontRotation), axis: (x: 0, y: 1, z: 0.0001)) // z being 0 gives warning message?
+                .offset(y: verticalOffset)
+                .animation(.spring(response: 0.5, dampingFraction: 0.75, blendDuration: 0), value: verticalOffset)
+                .rotation3DEffect(Angle(degrees: frontRotation), axis: (x: 0, y: 1, z: 0.00000001)) // z being 0 gives warning message?
     
             Text(letter)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -38,7 +43,9 @@ struct LetterView: View {
                 .font(.system(size: 35, weight: .heavy))
                 .foregroundColor(.primary)
                 .background(bgColor)
-                .rotation3DEffect(Angle(degrees: backRotation), axis: (x: 0, y: 1, z: 0.0001)) // z being 0 gives warning message?
+                .offset(y: verticalOffset)
+                .animation(.spring(response: 0.5, dampingFraction: 0.75, blendDuration: 0), value: verticalOffset)
+                .rotation3DEffect(Angle(degrees: backRotation), axis: (x: 0, y: 1, z: 0.00000001)) // z being 0 gives warning message?
         }
         .onChange(of: isFlipped) { _ in
             if isFlipped {
@@ -46,6 +53,13 @@ struct LetterView: View {
             } else {
                 frontRotation = 0
                 backRotation = 90
+            }
+        }
+        .onChange(of: isBouncing) { _ in
+            if isBouncing {
+                bounceCard()
+            } else {
+                verticalOffset = 0
             }
         }
     }
@@ -59,6 +73,14 @@ struct LetterView: View {
         
         withAnimation(.linear(duration: duration).delay(duration)){
             backRotation = 0
+        }
+    }
+    
+    func bounceCard() {
+        verticalOffset = -25
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            verticalOffset = 0
         }
     }
 }

@@ -17,6 +17,7 @@ struct Guess {
     var shake: CGFloat = 0
     var letterStatus = [LetterStatus](repeating: .incorrect, count: 5)
     var cardsFlipped = [Bool](repeating: false, count: 5)
+    var cardsBouncing = [Bool](repeating: false, count: 5)
     var guessLetters: [String] {
         word.map { String($0) }
     }

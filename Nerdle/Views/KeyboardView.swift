@@ -11,7 +11,7 @@ struct KeyboardView: View {
     @EnvironmentObject var dataModel: NerdleDataModel
     
     var body: some View {
-        VStack {
+        VStack(spacing: 2) {
             HStack(spacing: 2) {
                 ForEach(dataModel.topRowLetters, id: \.self) { letter in
                     if let key = dataModel.keys[letter] {
