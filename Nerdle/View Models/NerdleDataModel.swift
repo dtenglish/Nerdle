@@ -13,6 +13,7 @@ class NerdleDataModel: ObservableObject {
         case inPlay, win, lose
     }
     
+    @AppStorage("hardMode") var hardMode = false
     @Published var gameStatus: GameStatus = .inPlay
     @Published var screenWidth: CGFloat = 0
     @Published var guesses: [Guess] = []
@@ -68,6 +69,7 @@ class NerdleDataModel: ObservableObject {
         }
         
         gameStatus = .inPlay
+        print("solution: " + currentSolution)
     }
     
     func resetToDefaults() {
@@ -262,18 +264,41 @@ extension NerdleDataModel {
                 if !correctLetters.contains(guessLetter) {
                     correctLetters.append(guessLetter)
                 }
-            } else if solutionLetters.contains(guessLetter) {
-                guesses[rowIndex].letterStatus[i] = .misplaced
+            }
+        }
+        for i in 0...4 {
+            let guessLetter = guessLetters[i]
+            
+            if solutionLetters.contains(guessLetter) {
+                if guesses[rowIndex].letterStatus[i] != .correct {
+                    guesses[rowIndex].letterStatus[i] = .misplaced
+                    
+                    if let index = solutionLetters.firstIndex(where: {$0 == guessLetter}) {
+                        solutionLetters[index] = ""
+                    }
+                    
+
+                }
                 if !misplacedLetters.contains(guessLetter) {
                     misplacedLetters.append(guessLetter)
                 }
-            } else {
-                guesses[rowIndex].letterStatus[i] = .incorrect
             }
         }
-        
-        print("solution: " + currentSolution)
-        print("guess: " + currentGuess)
+    }
+    
+    func hardModeCheck() -> Bool {
+        if rowIndex > 1 {
+            let previousGuess = guesses[rowIndex - 1]
+            let guess = guesses[rowIndex]
+            
+            for i in 0...4 {
+                if previousGuess.letterStatus[i] == .correct && guess.letterStatus[i] != .correct {
+                    print("All correctly placed letters must be used")
+                    return false
+                }
+            }
+        }
+        return true
     }
     
     func updateRow() {
