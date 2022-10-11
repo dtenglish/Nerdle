@@ -212,10 +212,19 @@ extension NerdleDataModel {
     func enterWord() {
         if currentGuess.count == 5 {
             if verifyWord() {
+                if hardMode {
+                    if !hardModeCheck() {
+                        withAnimation {
+                            guesses[rowIndex].shake = 1
+                        }
+                        guesses[rowIndex].shake = 0
+                        showAlert(message: "All revealed hints must be used")
+                        return
+                    }
+                }
                 checkLetters()
                 updateGameUI()
                 checkGameStatus()
-                
             } else {
                 withAnimation {
                     guesses[rowIndex].shake = 1
@@ -287,14 +296,32 @@ extension NerdleDataModel {
     }
     
     func hardModeCheck() -> Bool {
-        if rowIndex > 1 {
+        if rowIndex > 0 {
             let previousGuess = guesses[rowIndex - 1]
-            let guess = guesses[rowIndex]
+            var guessLetters = guesses[rowIndex].guessLetters
             
             for i in 0...4 {
-                if previousGuess.letterStatus[i] == .correct && guess.letterStatus[i] != .correct {
-                    print("All correctly placed letters must be used")
-                    return false
+                print(previousGuess.letterStatus[i])
+                print(previousGuess.guessLetters[i])
+                print(guessLetters[i])
+                if previousGuess.letterStatus[i] == .correct {
+                    if previousGuess.guessLetters[i] != guessLetters[i] {
+                        return false
+                    } else {
+                        guessLetters[i] = ""
+                    }
+                }
+            }
+            
+            for i in 0...4 {
+                if previousGuess.letterStatus[i] == .misplaced  {
+                    if guessLetters.contains(previousGuess.guessLetters[i]) {
+                        if let index = guessLetters.firstIndex(where: {$0 == previousGuess.guessLetters[i]}) {
+                            guessLetters[index] = ""
+                        }
+                    } else {
+                        return false
+                    }
                 }
             }
         }

@@ -8,7 +8,16 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @EnvironmentObject var dataModel: NerdleDataModel
     @EnvironmentObject var schemeManager: ColorSchemeManager
+    
+    var gameInProgress: Bool {
+        if dataModel.gameStatus == .inPlay && dataModel.rowIndex > 0 {
+            return true
+        } else {
+            return false
+        }
+    }
     
     var body: some View {
         VStack {
@@ -21,14 +30,30 @@ struct SettingsView: View {
                     }
                     .pickerStyle(.menu)
                 }
-            }
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text("SETTINGS")
-                        .font(.title)
-                        .fontWeight(.heavy)
-                        .foregroundColor(.primary)
+                Section("GAME DIFFICULTY") {
+                    Picker("Difficulty", selection: dataModel.$hardMode) {
+                        Text("Normal").tag(false)
+                        Text("Hard").tag(true)
+                    }
+                    .pickerStyle(.segmented)
+                    .disabled(gameInProgress)
+                    .opacity(gameInProgress ? 0.75 : 1)
+                    
+                    if gameInProgress {
+                        Text("Difficulty cannot be changed while game in progress")
+                            .foregroundColor(.red)
+                            .font(.subheadline)
+                    }
                 }
+                .listRowSeparator(.hidden)
+            }
+        }
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text("SETTINGS")
+                    .font(.title)
+                    .fontWeight(.heavy)
+                    .foregroundColor(.primary)
             }
         }
     }
