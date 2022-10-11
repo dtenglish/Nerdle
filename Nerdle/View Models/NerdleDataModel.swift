@@ -324,7 +324,7 @@ extension NerdleDataModel {
     
     func bounceCards(row: Int) {
         for i in 0...4 {
-            DispatchQueue.main.asyncAfter(deadline: .now() + Double(i) * 0.3) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + Double(i) * 0.25) {
                 self.guesses[row].cardsBouncing[i] = true
             }
         }

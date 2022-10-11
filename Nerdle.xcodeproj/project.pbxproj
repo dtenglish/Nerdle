@@ -23,6 +23,7 @@
 		BD65008E28E384E000408A4B /* KeyboardKeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD65008D28E384E000408A4B /* KeyboardKeyView.swift */; };
 		BD65009028E38B6B00408A4B /* KeyboardKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD65008F28E38B6B00408A4B /* KeyboardKey.swift */; };
 		BD65009428E39AE000408A4B /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD65009328E39AE000408A4B /* KeyboardView.swift */; };
+		BD713A3928F5D77F00E474AC /* ColorSchemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD713A3828F5D77F00E474AC /* ColorSchemeManager.swift */; };
 		BDA286AD28EB7AC30042C1D1 /* LetterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA286AC28EB7AC30042C1D1 /* LetterView.swift */; };
 		BDA286AF28ECC3120042C1D1 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA286AE28ECC3120042C1D1 /* AlertView.swift */; };
 		BDA286B128ECC9B50042C1D1 /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA286B028ECC9B50042C1D1 /* Stats.swift */; };
@@ -49,6 +50,7 @@
 		BD65008D28E384E000408A4B /* KeyboardKeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardKeyView.swift; sourceTree = "<group>"; };
 		BD65008F28E38B6B00408A4B /* KeyboardKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardKey.swift; sourceTree = "<group>"; };
 		BD65009328E39AE000408A4B /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
+		BD713A3828F5D77F00E474AC /* ColorSchemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSchemeManager.swift; sourceTree = "<group>"; };
 		BDA286AC28EB7AC30042C1D1 /* LetterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterView.swift; sourceTree = "<group>"; };
 		BDA286AE28ECC3120042C1D1 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		BDA286B028ECC9B50042C1D1 /* Stats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stats.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				BD65007D28E22D0100408A4B /* NerdleDataModel.swift */,
+				BD713A3828F5D77F00E474AC /* ColorSchemeManager.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -249,6 +252,7 @@
 				BDA286B528EE0EDA0042C1D1 /* StatsGraphView.swift in Sources */,
 				BD65008028E2323F00408A4B /* MainView.swift in Sources */,
 				BD65008828E37A8F00408A4B /* HelpView.swift in Sources */,
+				BD713A3928F5D77F00E474AC /* ColorSchemeManager.swift in Sources */,
 				BD65007B28E22BA600408A4B /* GuessView.swift in Sources */,
 				BD65007928E22ABC00408A4B /* Guess.swift in Sources */,
 				BD65007E28E22D0100408A4B /* NerdleDataModel.swift in Sources */,
