@@ -49,6 +49,17 @@ class NerdleDataModel: ObservableObject {
             return 1.8
         }
     }
+
+    var winMessage: String {
+        switch rowIndex {
+        case 0: return "Amazing!"
+        case 1: return "Magnificent!"
+        case 2: return "Well done!"
+        case 3: return "Good job!"
+        case 4: return "Close one!"
+        default: return "Phew!"
+        }
+    }
     
     init() {
         wordQueue = generateWordList()
@@ -347,7 +358,7 @@ extension NerdleDataModel {
             if gameStatus != .inPlay
             {
                 if gameStatus == .win {
-                    showAlert(message: "Correct guess, you win!")
+                    showAlert(message: winMessage)
                     bounceCards(row: rowIndex)
                 } else if gameStatus == .lose {
                     showAlert(message: "Out of guesses, you lose")
@@ -374,7 +385,7 @@ extension NerdleDataModel {
     
     func bounceCards(row: Int) {
         for i in 0...4 {
-            DispatchQueue.main.asyncAfter(deadline: .now() + Double(i) * 0.25) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + Double(i) * 0.15) {
                 self.guesses[row].cardsBouncing[i] = true
             }
         }

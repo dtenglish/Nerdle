@@ -23,12 +23,14 @@ struct HelpView: View {
             HStack {
                 Spacer()
                 Button {
-                    withAnimation {
-                        dataModel.showHelp = false
-                    }
+                    dataModel.showHelp = false
                 } label: {
-                    Text("X")
+                    Image(systemName: "multiply")
+                        .font(.title2)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.accentColor)
                 }
+                .padding(.top, 10)
             }
             VStack(alignment: .leading, spacing: 10) {
                 Text("How To Play")
@@ -87,7 +89,7 @@ struct HelpView: View {
         .frame(width: rem * 9)
         .fixedSize()
         .background(RoundedRectangle(cornerRadius: 8)
-            .fill(Color.systemBackground)
+            .fill(Color(UIColor.systemGray6))
             .shadow(color: .black.opacity(0.3), radius: 6, x: 2, y: 2)
         )
     }

@@ -15,7 +15,6 @@ struct MainView: View {
             NavigationStack {
                 GameView()
                     .padding()
-                    .disabled(dataModel.showStats)
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
                         ToolbarItem(placement: .navigationBarLeading) {
@@ -45,13 +44,13 @@ struct MainView: View {
                         }
                     }
             }
+            .disabled(dataModel.showStats || dataModel.showHelp)
             if dataModel.showStats {
                 StatsView()
                     .offset(y: dataModel.screenWidth * -0.15)
             }
             if dataModel.showHelp {
                 HelpView()
-//                    .offset(y: dataModel.screenWidth * -0.15)
             }
         }
     }

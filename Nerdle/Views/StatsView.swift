@@ -19,17 +19,19 @@ struct StatsView: View {
             HStack {
                 Spacer()
                 Button {
-                    withAnimation {
-                        dataModel.showStats = false
-                    }
+                    dataModel.showStats = false
                 } label: {
-                    Text("X")
+                    Image(systemName: "multiply")
+                        .font(.title2)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.accentColor)
                 }
+                .padding(.top, 10)
             }
             Text("STATISTICS")
-                .font(.headline)
-                .fontWeight(.bold)
-                .padding(.bottom, 12)
+                .font(.title2)
+                .fontWeight(.semibold)
+                .padding(.bottom, 8)
             HStack(alignment: .top, spacing: 0) {
                 StatCounterView(label: "Played", value: dataModel.stats.totalGames)
                     .frame(width: rem * 2)
@@ -44,11 +46,11 @@ struct StatsView: View {
                     .frame(width: rem * 2)
                     .fixedSize()
             }
-            .padding(.bottom, 12)
+            .padding(.bottom, 24)
             Text("GUESS DISTRIBUTION")
-                .font(.headline)
-                .fontWeight(.bold)
-                .padding(.bottom, 16)
+                .font(.title2)
+                .fontWeight(.semibold)
+                .padding(.bottom, 12)
             StatsGraphView()
                 .frame(maxWidth: .infinity)
                 .padding(.bottom, dataModel.gameStatus == .inPlay ? 24 : 12)
@@ -90,7 +92,7 @@ struct StatsView: View {
         .frame(width: rem * 9)
         .fixedSize()
         .background(RoundedRectangle(cornerRadius: 8)
-            .fill(Color.systemBackground)
+            .fill(Color(UIColor.systemGray6))
             .shadow(color: .black.opacity(0.3), radius: 6, x: 2, y: 2)
         )
     }
