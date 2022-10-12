@@ -19,7 +19,9 @@ struct MainView: View {
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
                         ToolbarItem(placement: .navigationBarLeading) {
-                            NavigationLink(destination: HelpView()) {
+                            Button {
+                                dataModel.showHelp.toggle()
+                            } label: {
                                 Image(systemName: "questionmark.circle")
                             }
                         }
@@ -46,6 +48,10 @@ struct MainView: View {
             if dataModel.showStats {
                 StatsView()
                     .offset(y: dataModel.screenWidth * -0.15)
+            }
+            if dataModel.showHelp {
+                HelpView()
+//                    .offset(y: dataModel.screenWidth * -0.15)
             }
         }
     }

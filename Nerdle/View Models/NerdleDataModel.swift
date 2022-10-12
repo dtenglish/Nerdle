@@ -20,6 +20,7 @@ class NerdleDataModel: ObservableObject {
     @Published var keys: [String: KeyboardKey] = [:]
     @Published var alertMessage: String?
     @Published var showStats = false
+    @Published var showHelp = false
     
     var wordQueue: [String] = []
     var completedWords: [String] = []
@@ -301,9 +302,6 @@ extension NerdleDataModel {
             var guessLetters = guesses[rowIndex].guessLetters
             
             for i in 0...4 {
-                print(previousGuess.letterStatus[i])
-                print(previousGuess.guessLetters[i])
-                print(guessLetters[i])
                 if previousGuess.letterStatus[i] == .correct {
                     if previousGuess.guessLetters[i] != guessLetters[i] {
                         return false
@@ -395,6 +393,10 @@ extension NerdleDataModel {
     
     func getResult() -> String {
         var resultString = "Nerdle #\(stats.totalGames) - \(rowIndex + 1) / 6"
+        
+        if hardMode {
+            resultString += "*"
+        }
         
         for i in 0...rowIndex {
             resultString += "\n"
