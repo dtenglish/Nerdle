@@ -28,6 +28,7 @@ class NerdleDataModel: ObservableObject {
     var misplacedLetters: [String] = []
     var incorrectLetters: [String] = []
     var stats: Stats = Stats()
+    var statManager = DataManager<Stats>()
     
     var currentSolution = ""
     var currentGuess = ""
@@ -38,6 +39,32 @@ class NerdleDataModel: ObservableObject {
     let topRowLetters = "QWERTYUIOP".map { String($0) }
     let middleRowLetters = "ASDFGHJKL".map { String($0) }
     let bottomRowLetters = "ZXCVBNM".map { String($0) }
+    
+//    var useCloud: Bool {
+//            get {
+//                return statManager.useCloud
+//            }
+//            set {
+//                if newValue {
+//                    if !statManager.verifyCloudAccount() {
+//                        showAlert(message: "Could not verify iCloud account")
+//                        statManager.useCloud = false
+//                        return
+//                    }
+//                }
+//                statManager.useCloud = newValue
+//            }
+//    }
+    
+//    var useCloud: Bool = false {
+//        willSet(newValue) {
+//            if newValue {
+//                if !statManager.verifyCloudAccount() {
+//                    statManager.
+//                }
+//            }
+//        }
+//    }
     
     var scaleFactor: CGFloat {
         switch screenWidth {
@@ -65,6 +92,8 @@ class NerdleDataModel: ObservableObject {
         wordQueue = generateWordList()
         newGame()
         populateKeys()
+//        stats = getUserStats() ?? Stats()
+        initializeUserStats()
     }
     
     func newGame() {
@@ -104,7 +133,12 @@ class NerdleDataModel: ObservableObject {
         
         keys["ENTER"]?.isDisabled = true
         keys["BACKSPACE"]?.isDisabled = true
-        
+    }
+    
+    func initializeUserStats() {
+        if let userStats = getUserStats() {
+            stats = userStats
+        }
     }
     
 }
@@ -256,10 +290,12 @@ extension NerdleDataModel {
                 stats.highestStreak = stats.currentStreak
             }
             gameStatus = .win
+            setUserStats(stats)
         } else if rowIndex == 5 {
             stats.totalGames += 1
             stats.currentStreak = 0
             gameStatus = .lose
+            setUserStats(stats)
         } else {
             rowIndex += 1
             currentGuess = ""
@@ -342,6 +378,22 @@ extension NerdleDataModel {
         guesses[rowIndex].word = rowLetters
     }
     
+}
+
+//MARK: - STATISTICS
+
+extension NerdleDataModel {
+    func getUserStats() -> Stats? {
+        if let userStats = statManager.getUserData(key: "stats") {
+            return userStats
+        } else {
+            return nil
+        }
+    }
+    
+    func setUserStats(_ data: Stats) {
+        statManager.setUserData(key: "stats", data: data)
+    }
 }
 
 //MARK: - UI

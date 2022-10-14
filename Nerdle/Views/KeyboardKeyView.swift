@@ -38,10 +38,9 @@ struct KeyboardKeyView: View {
                         .font(.system(size: fontSize + 3, weight: .heavy))
                         .frame(width: largeKeyWidth, height: keyHeight)
                 } else if key.key == "ENTER"{
-                    Image(systemName: "arrowshape.forward.fill")
+                    Image(systemName: "return")
                         .font(.system(size: fontSize + 3, weight: .heavy))
                         .frame(width: largeKeyWidth, height: keyHeight)
-                        .rotationEffect(.degrees(-90))
                 } else {
                     Text(key.key)
                         .font(.system(size: fontSize, weight: .semibold))

@@ -30,15 +30,17 @@ struct HelpView: View {
                         .fontWeight(.semibold)
                         .foregroundColor(.accentColor)
                 }
-                .padding(.top, 10)
+                .padding(.top, rem * 0.25)
             }
-            VStack(alignment: .leading, spacing: 10) {
+            VStack(alignment: .leading, spacing: 0) {
                 Text("How To Play")
                     .font(.largeTitle)
                     .fontWeight(.heavy)
+                    .padding(.bottom, rem * 0.1)
                 Text("Guess the Nerdle in 6 tries.")
                     .font(.title3)
                     .fontWeight(.semibold)
+                    .padding(.bottom, rem * 0.25)
                 Label {
                     Text("Each guess must be a valid five letter word.")
                 } icon: {

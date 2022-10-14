@@ -24,6 +24,7 @@
 		BD65009028E38B6B00408A4B /* KeyboardKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD65008F28E38B6B00408A4B /* KeyboardKey.swift */; };
 		BD65009428E39AE000408A4B /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD65009328E39AE000408A4B /* KeyboardView.swift */; };
 		BD713A3928F5D77F00E474AC /* ColorSchemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD713A3828F5D77F00E474AC /* ColorSchemeManager.swift */; };
+		BD713A3C28F87E6300E474AC /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD713A3B28F87E6300E474AC /* DataManager.swift */; };
 		BDA286AD28EB7AC30042C1D1 /* LetterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA286AC28EB7AC30042C1D1 /* LetterView.swift */; };
 		BDA286AF28ECC3120042C1D1 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA286AE28ECC3120042C1D1 /* AlertView.swift */; };
 		BDA286B128ECC9B50042C1D1 /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA286B028ECC9B50042C1D1 /* Stats.swift */; };
@@ -51,6 +52,8 @@
 		BD65008F28E38B6B00408A4B /* KeyboardKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardKey.swift; sourceTree = "<group>"; };
 		BD65009328E39AE000408A4B /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
 		BD713A3828F5D77F00E474AC /* ColorSchemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSchemeManager.swift; sourceTree = "<group>"; };
+		BD713A3A28F87CBF00E474AC /* Nerdle.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Nerdle.entitlements; sourceTree = "<group>"; };
+		BD713A3B28F87E6300E474AC /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		BDA286AC28EB7AC30042C1D1 /* LetterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterView.swift; sourceTree = "<group>"; };
 		BDA286AE28ECC3120042C1D1 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		BDA286B028ECC9B50042C1D1 /* Stats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stats.swift; sourceTree = "<group>"; };
@@ -72,6 +75,7 @@
 		BD5A9BF528E623AC003ADBFC /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				BD713A3B28F87E6300E474AC /* DataManager.swift */,
 				BD5A9BF628E623E6003ADBFC /* WordList.swift */,
 			);
 			path = Data;
@@ -96,6 +100,7 @@
 		BD64944728E21BBF00828AC7 /* Nerdle */ = {
 			isa = PBXGroup;
 			children = (
+				BD713A3A28F87CBF00E474AC /* Nerdle.entitlements */,
 				BD64944828E21BBF00828AC7 /* NerdleApp.swift */,
 				BD65007628E22A9B00408A4B /* Models */,
 				BD65007728E22AA200408A4B /* Views */,
@@ -251,6 +256,7 @@
 				BDA286AD28EB7AC30042C1D1 /* LetterView.swift in Sources */,
 				BDA286B528EE0EDA0042C1D1 /* StatsGraphView.swift in Sources */,
 				BD65008028E2323F00408A4B /* MainView.swift in Sources */,
+				BD713A3C28F87E6300E474AC /* DataManager.swift in Sources */,
 				BD65008828E37A8F00408A4B /* HelpView.swift in Sources */,
 				BD713A3928F5D77F00E474AC /* ColorSchemeManager.swift in Sources */,
 				BD65007B28E22BA600408A4B /* GuessView.swift in Sources */,
@@ -386,6 +392,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Nerdle/Nerdle.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Nerdle/Preview Content\"";
@@ -417,6 +424,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Nerdle/Nerdle.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Nerdle/Preview Content\"";

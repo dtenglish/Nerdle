@@ -26,7 +26,7 @@ struct StatsView: View {
                         .fontWeight(.semibold)
                         .foregroundColor(.accentColor)
                 }
-                .padding(.top, 10)
+                .padding(.top, rem * 0.25)
             }
             Text("STATISTICS")
                 .font(.title2)
